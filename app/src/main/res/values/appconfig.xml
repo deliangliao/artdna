@@ -4,9 +4,9 @@
     <string name="is_debug">true</string>
 
     <!-- 友盟key -->
-    <string name="umeng_key">56725eea67e58e50c10044cf</string>
+    <string name="umeng_key">56aef9bde0f55a3e6500280e</string>
 
     <!-- 友盟渠道 -->
-    <string name="umeng_channel">bookshop_umeng</string>
+    <string name="umeng_channel">art_umeng</string>
 
 </resources>

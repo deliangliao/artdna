@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- 是否是debug模式，发布的时候请改成false -->
+    <string name="is_debug">true</string>
+
+    <!-- 友盟key -->
+    <string name="umeng_key">56725eea67e58e50c10044cf</string>
+
+    <!-- 友盟渠道 -->
+    <string name="umeng_channel">bookshop_umeng</string>
+
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#48b348</color>
+    <color name="colorPrimaryDark">#388E3C</color>
+    <color name="colorAccent">#48b348</color>
+
+    <color name="gray_text">#bbbbbb</color>
+    <color name="pic_default_bg_color">#c9c9c9</color>
+
+    <!-- 通用 -->
+    <color name="white">#ffffffff</color> <!-- 白色 -->
+    <color name="black">#ff000000</color> <!-- 黑色 -->
+    <color name="red">#e65c5c</color>
+    <color name="transparent">#00000000</color> <!-- 透明色 -->
+    <color name="white_translucent">#7fFFFFFF</color>
+    <color name="black_translucent">#7f000000</color>
+    <color name="transparent_black">#80000000</color> <!-- 透明黑 -->
+    <color name="background">#efeff4</color> <!-- 背景颜色 -->
+    <color name="loading_bar_color">#ff000000</color> <!-- loadingBar -->
+    <color name="list_divider_line">#e5e5e5</color>
+    <color name="white_f8f8f8">#f8f8f8</color>
+    <color name="full_transparent">#00000000</color><!-- 全透明 -->
+    <color name="half_transparent">#aa000000</color>
+    <color name="line_color">#f3f3f3</color>
+
+    <!-- 对话框颜色 -->
+    <color name="trans">#00000000</color>
+    <color name="alertdialog_line">#c6c6c6</color>
+    <color name="actionsheet_blue">#037BFF</color>
+    <color name="actionsheet_red">#FD4A2E</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
+
+</resources>

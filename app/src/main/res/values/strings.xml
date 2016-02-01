@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="app_name">艺管家</string>
+
+    <string name="alert_card_mac_blank">该卡无效，请重新刷卡！</string>
+
+</resources>

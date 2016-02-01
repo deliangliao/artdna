@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="radius" format="dimension" />
+
+    <declare-styleable name="ProgressWheel">
+        <attr name="matProg_progressIndeterminate" format="boolean" />
+        <attr name="matProg_barColor" format="color" />
+        <attr name="matProg_rimColor" format="color" />
+        <attr name="matProg_rimWidth" format="dimension" />
+        <attr name="matProg_spinSpeed" format="float" />
+        <attr name="matProg_barSpinCycleTime" format="integer" />
+        <attr name="matProg_circleRadius" format="dimension" />
+        <attr name="matProg_fillRadius" format="boolean" />
+        <attr name="matProg_barWidth" format="dimension" />
+        <attr name="matProg_linearProgress" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="JazzyListView">
+        <attr name="effect" format="enum" >
+            <enum name="standard" value="0" />
+            <enum name="grow" value="1" />
+            <enum name="cards" value="2" />
+            <enum name="curl" value="3" />
+            <enum name="wave" value="4" />
+            <enum name="flip" value="5" />
+            <enum name="fly" value="6" />
+            <enum name="reverse_fly" value="7" />
+            <enum name="helix" value="8" />
+            <enum name="fan" value="9" />
+            <enum name="tilt" value="10" />
+            <enum name="zipper" value="11" />
+            <enum name="fade" value="12" />
+            <enum name="twirl" value="13" />
+            <enum name="slide_in" value="14" />
+        </attr>
+        <attr name="only_animate_new_items" format="boolean" />
+        <attr name="only_animate_fling" format="boolean" />
+        <attr name="simulate_grid_with_list" format="boolean" />
+        <attr name="max_velocity" format="integer" />
+    </declare-styleable>
+    
+    <declare-styleable name="FlashView">
+        <attr name="anim_effect" format="enum" >
+            <enum name="accordion" value="0" />
+            <enum name="cube" value="1" />
+            <enum name="def" value="2" />
+            <enum name="depthPage" value="3" />
+            <enum name="inRightDown" value="4" />
+            <enum name="inRightUp" value="5" />
+            <enum name="rotate" value="6" />
+            <enum name="zoomOutPage" value="7" />
+        </attr>
+    </declare-styleable>
+    
+    <declare-styleable name="rounded_imageview_widget">
+        <attr name="round_pixel" format="integer" />
+    </declare-styleable>
+    
+    
+    <declare-styleable name="SegmentControl">
+        <attr name="cornerRadius" format="dimension|reference" />
+        <attr name="colors" format="color|reference" />
+        <attr name="texts" format="string|reference" />
+        <attr name="android:textSize" />
+        <attr name="direction" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="gaps" format="dimension|reference" />
+        <attr name="horizonGap" format="dimension|reference" />
+        <attr name="verticalGap" format="dimension|reference" />
+        <attr name="selectedIndex" format="integer" />
+    </declare-styleable>
+
+</resources>

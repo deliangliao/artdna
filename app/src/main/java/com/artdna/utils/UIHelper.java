@@ -20,7 +20,7 @@ import com.artdna.res.widget.CustomProgressDialog;
 public class UIHelper {
 
     /**
-     * 设置隐藏模态进度条
+     * 创建通用ProgressDialog
      */
     public static CustomProgressDialog customProgressDialog(Activity activity, String message) {
         CustomProgressDialog progressDialog = CustomProgressDialog.getDialog(activity);

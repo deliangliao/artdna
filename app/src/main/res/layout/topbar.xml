@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="51dp"
     android:focusable="true"
-    android:background="@color/white"
+    android:background="@color/colorPrimary"
     android:focusableInTouchMode="true"
     android:orientation="vertical">
 
@@ -38,7 +38,7 @@
 
         <TextView
             android:id="@+id/top_title"
-            style="@style/black_title.18sp"
+            style="@style/white_title.18sp"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:ellipsize="end"

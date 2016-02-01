@@ -21,7 +21,13 @@ public class MainActivity extends BaseArtActivity {
 		return R.layout.activity_main;
 	}
 
-	@Override
+    @Override
+    protected void initComponents() {
+        super.initComponents();
+        setSwipeBackEnable(false);
+    }
+
+    @Override
 	protected void initData() {
 
 	}

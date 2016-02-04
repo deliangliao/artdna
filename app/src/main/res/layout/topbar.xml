@@ -30,8 +30,6 @@
                 android:drawablePadding="3dip"
                 android:gravity="center_vertical"
                 android:singleLine="true"
-                android:text="@string/title_back"
-                android:textColor="@drawable/title_text_selector"
                 android:textSize="18sp"/>
 
         </LinearLayout>
@@ -52,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="15dp">
 
             <ImageView
                 android:id="@+id/top_right"
@@ -73,8 +71,4 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray_text"/>
 </LinearLayout>

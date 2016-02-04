@@ -7,6 +7,7 @@ import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.NfcF;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.artdna.bean.DNAEntity;
 import com.artdna.config.Urls;
 import com.artdna.ui.base.BaseArtActivity;
 import com.artdna.utils.NFCUtils;
+import com.artdna.utils.TopUtil;
 import com.shengshi.base.tools.Log;
 import com.shengshi.http.net.AppException;
 import com.shengshi.http.net.Request;
@@ -25,6 +27,16 @@ import butterknife.Bind;
 
 public class DnaInfoActivity extends BaseArtActivity {
 
+    @Bind(R.id.dnaCode)
+    TextView dnaCode;
+    @Bind(R.id.dnaCount)
+    TextView dnaCount;
+    @Bind(R.id.ic_auth)
+    ImageView icAuth;
+    @Bind(R.id.auth_company_info_layout)
+    View authCompanyTip;
+    @Bind(R.id.art_detail_info_list)
+    View detailList;
     @Bind(R.id.artImg)
     ImageView artImg;
     @Bind(R.id.artName)
@@ -33,6 +45,8 @@ public class DnaInfoActivity extends BaseArtActivity {
     TextView artType;
     @Bind(R.id.artAge)
     TextView artAge;
+    @Bind(R.id.artPrice)
+    TextView artPrice;
     @Bind(R.id.artModel)
     TextView artModel;
 
@@ -48,6 +62,7 @@ public class DnaInfoActivity extends BaseArtActivity {
      */
     String mUid = "";
     String mDnaId = "";
+    boolean hasRequested = false;
 
     @Override
     protected int getMainContentViewId() {
@@ -55,9 +70,19 @@ public class DnaInfoActivity extends BaseArtActivity {
     }
 
     @Override
+    protected void initComponents() {
+        super.initComponents();
+        TopUtil.updateRight(mActivity, R.id.top_right, R.drawable.share);
+    }
+
+    @Override
     protected void initData() {
         showFailLayout("请把卡片放在支持NFC功能的手机背面");
         initNfc();
+        //TODO 模拟NFC测试
+//        processUid("04AFA02A783F80");//认证通过 T00000025
+        processUid("0491A02A783F80");//认证不通过 T00000028
+//        processUid("0491A011183F80");//认证不通过 乱造的数据
     }
 
     private void initNfc() {
@@ -120,27 +145,34 @@ public class DnaInfoActivity extends BaseArtActivity {
         request.addParameter("uid", uid);
         request.setCallback(jsonCallback);
         request.execute();
+        hasRequested = true;
     }
 
     JsonCallback<DNAEntity> jsonCallback = new JsonCallback<DNAEntity>() {
 
         @Override
         public void onSuccess(DNAEntity result) {
+            hideLoadingBar();
             if (result == null) {
                 showFailLayout("请求异常，请稍候再试");
                 return;
             }
             if (result.RtnCode == 0) {
-                if (TextUtils.isEmpty(result.RtnMsg)) {
-                    showFailLayout("请求异常，请稍候再试");
-                } else {
-                    showFailLayout(result.RtnMsg);
+                if (!TextUtils.isEmpty(result.RtnMsg)) {
+                    toast(result.RtnMsg);
                 }
+                showUnAuthInfo();
                 return;
             }
             try {
                 mDnaId = result.dnaId;
-                requestDnaInfo();
+                dnaCode.setText("DNA编码:" + mDnaId);
+                if (TextUtils.isEmpty(mDnaId)) {
+                    showUnAuthInfo();
+                } else {
+                    showAuthInfo();
+                    requestDnaInfo();
+                }
             } catch (Exception e) {
                 Log.e(e.getMessage(), e);
             }
@@ -159,12 +191,26 @@ public class DnaInfoActivity extends BaseArtActivity {
 
     };
 
+    private void showAuthInfo() {
+        icAuth.setImageResource(R.drawable.ic_auth);
+        dnaCount.setVisibility(View.VISIBLE);
+        dnaCode.setVisibility(View.VISIBLE);
+        authCompanyTip.setVisibility(View.VISIBLE);
+        detailList.setVisibility(View.VISIBLE);
+    }
+
+    private void showUnAuthInfo() {
+        icAuth.setImageResource(R.drawable.ic_unauth);
+        dnaCount.setVisibility(View.GONE);
+        dnaCode.setVisibility(View.GONE);
+        authCompanyTip.setVisibility(View.GONE);
+        detailList.setVisibility(View.GONE);
+    }
+
     private void requestDnaInfo() {
         showLoadingBar();
         Request request = new Request(Urls.GET_DNA_INFO_URL());
-        request.addParameter("dnaId", mDnaId);
-        //TODO 测试值，发布删掉
-//        request.addParameter("dnaID", "T00000025");
+        request.addParameter("dnaID", mDnaId);
         request.setCallback(dnaInfoCallback);
         request.execute();
     }
@@ -179,10 +225,8 @@ public class DnaInfoActivity extends BaseArtActivity {
                 return;
             }
             if (result.RtnCode == 0) {
-                if (TextUtils.isEmpty(result.RtnMsg)) {
-                    showFailLayout("请求异常，请稍候再试");
-                } else {
-                    showFailLayout(result.RtnMsg);
+                if (!TextUtils.isEmpty(result.RtnMsg)) {
+                    toast(result.RtnMsg);
                 }
                 return;
             }
@@ -208,21 +252,35 @@ public class DnaInfoActivity extends BaseArtActivity {
 
     private void fetchData(DNADetailEntity entity) throws Exception {
         imageLoader.displayImage(Urls.GET_SERVER_ROOT_URL() + entity.imgUrl, artImg);
-        artName.setText(entity.artName);
-        artType.setText(entity.ArtType);
-        artAge.setText(entity.artAge);
-        artModel.setText(entity.artModel);
-    }
-
-    @Override
-    public void onRequestAgain() {
-        super.onRequestAgain();
-        if (TextUtils.isEmpty(mDnaId)) {
-            processUid(mUid);
-        } else {
-            requestDnaInfo();
+        if(!TextUtils.isEmpty(entity.artName)){
+            artName.setText(entity.artName);
+        }
+        if(!TextUtils.isEmpty(entity.ArtType)){
+            artType.setText(entity.ArtType);
+        }
+        if(!TextUtils.isEmpty(entity.artAge)){
+            artAge.setText(entity.artAge);
+        }
+        if(!TextUtils.isEmpty(entity.artPrice)){
+            artPrice.setText(entity.artPrice);
+        }
+        if(!TextUtils.isEmpty(entity.artModel)){
+            artModel.setText(entity.artModel);
         }
     }
+
+//    @Override
+//    public void onRequestAgain() {
+//        if (!hasRequested) {
+//            return;
+//        }
+//        super.onRequestAgain();
+//        if (TextUtils.isEmpty(mDnaId)) {
+//            processUid(mUid);
+//        } else {
+//            requestDnaInfo();
+//        }
+//    }
 
     @Override
     public String getTopTitle() {

@@ -5,141 +5,245 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/topbar"/>
+    <include layout="@layout/topbar" />
 
-    <include layout="@layout/widget_loading_bar_layout"/>
+    <include layout="@layout/widget_loading_bar_layout" />
 
-    <RelativeLayout
-        android:id="@+id/artNameLayout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="10dp">
+        android:layout_height="160dp"
+        android:background="@drawable/bg_dna_info"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <ImageView
-            android:id="@+id/artImg"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_alignParentLeft="true"
-            android:scaleType="centerCrop"/>
+            android:id="@+id/ic_auth"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:src="@drawable/ic_auth" />
 
-        <TextView
-            android:id="@+id/artName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="30dp"
-            android:textColor="@color/blue"
-            android:textSize="20sp"
-            tools:text="清朝陶瓷"/>
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/icon_indicate_more"/>
+            <TextView
+                android:id="@+id/dnaCount"
+                style="@style/black_title.16sp"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:text="鉴定次数:18/100次" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/dnaCode"
+                style="@style/black_title.16sp"
+                android:layout_marginTop="10dp"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                tools:text="DNA编码:" />
+        </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginLeft="20dp"
-        android:background="@color/gray_text"/>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/auth_company_info_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="20dp">
+        android:background="@drawable/bg_auth"
+        android:gravity="center">
 
         <TextView
-            style="@style/black_title.20sp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:text="类型"/>
+            style="@style/white_title.16sp"
+            android:text="已通过深圳市财富集团有限公司艺术品DNA平台认证" />
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/artType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/blue"
-            android:textSize="20sp"
-            tools:text="工艺品"/>
-
-    </RelativeLayout>
-
-    <View
+    <!-- 具体信息展示 -->
+    <ScrollView
+        android:id="@+id/art_detail_info_list"
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginLeft="20dp"
-        android:background="@color/gray_text"/>
+        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            style="@style/black_title.20sp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:text="年代"/>
+            <RelativeLayout
+                android:id="@+id/artNameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp">
 
-        <TextView
-            android:id="@+id/artAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/blue"
-            android:textSize="20sp"
-            tools:text="清朝"/>
+                <ImageView
+                    android:id="@+id/artImg"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_alignParentLeft="true"
+                    android:scaleType="centerCrop" />
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/artName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="30dp"
+                    android:text="-"
+                    android:textColor="@color/blue"
+                    android:textSize="20sp"
+                    tools:text="清朝陶瓷" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginLeft="20dp"
-        android:background="@color/gray_text"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_indicate_more" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="20dp">
+            </RelativeLayout>
 
-        <TextView
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:text="规格"
-            style="@style/black_title.20sp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dp"
+                android:background="@color/gray_text" />
 
-        <TextView
-            android:id="@+id/artModel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/blue"
-            android:textSize="20sp"
-            tools:text="青花瓷-001"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp">
 
-    </RelativeLayout>
+                <TextView
+                    style="@style/black_title.20sp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="类型" />
 
+                <TextView
+                    android:id="@+id/artType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="-"
+                    android:textColor="@color/blue"
+                    android:textSize="20sp"
+                    tools:text="工艺品" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dp"
+                android:background="@color/gray_text" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp">
+
+                <TextView
+                    style="@style/black_title.20sp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="年代" />
+
+                <TextView
+                    android:id="@+id/artAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="-"
+                    android:textColor="@color/blue"
+                    android:textSize="20sp"
+                    tools:text="清朝" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dp"
+                android:background="@color/gray_text" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp">
+
+                <TextView
+                    style="@style/black_title.20sp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="价格" />
+
+                <TextView
+                    android:id="@+id/artPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="-"
+                    android:textColor="@color/blue"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dp"
+                android:background="@color/gray_text" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp">
+
+                <TextView
+                    style="@style/black_title.20sp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="规格" />
+
+                <TextView
+                    android:id="@+id/artModel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="-"
+                    android:textColor="@color/blue"
+                    android:textSize="20sp"
+                    tools:text="青花瓷-001" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dp"
+                android:background="@color/gray_text" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

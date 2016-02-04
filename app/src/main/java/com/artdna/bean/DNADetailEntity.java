@@ -10,6 +10,7 @@ public class DNADetailEntity implements Serializable{
     public String artModel;
     public String ArtType;
     public String createDate;
+    public String artPrice;//原来接口没有
     public int RtnCode;
     public String RtnMsg;
 }

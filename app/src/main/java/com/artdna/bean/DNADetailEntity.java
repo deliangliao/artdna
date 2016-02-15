@@ -8,6 +8,7 @@ public class DNADetailEntity implements Serializable{
     public String artAge;
     public String artInfo;
     public String artModel;
+    public String artAuthor;
     public String ArtType;
     public String createDate;
     public String artPrice;//原来接口没有

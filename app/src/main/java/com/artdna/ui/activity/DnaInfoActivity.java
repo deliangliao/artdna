@@ -6,6 +6,7 @@ import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.NfcF;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ import com.shengshi.http.net.Request;
 import com.shengshi.http.net.callback.JsonCallback;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class DnaInfoActivity extends BaseArtActivity {
 
@@ -49,6 +51,8 @@ public class DnaInfoActivity extends BaseArtActivity {
     TextView artPrice;
     @Bind(R.id.artModel)
     TextView artModel;
+    @Bind(R.id.artAuthor)
+    TextView artAuthor;
 
     //==================== NFC相关参数开始 ====================================
     NfcAdapter nfcAdapter;
@@ -81,7 +85,7 @@ public class DnaInfoActivity extends BaseArtActivity {
         initNfc();
         //TODO 模拟NFC测试
 //        processUid("04AFA02A783F80");//认证通过 T00000025
-        processUid("0491A02A783F80");//认证不通过 T00000028
+//        processUid("0491A02A783F80");//认证不通过 T00000028
 //        processUid("0491A011183F80");//认证不通过 乱造的数据
     }
 
@@ -267,10 +271,13 @@ public class DnaInfoActivity extends BaseArtActivity {
         if(!TextUtils.isEmpty(entity.artModel)){
             artModel.setText(entity.artModel);
         }
+        if(!TextUtils.isEmpty(entity.artAuthor)){
+            artAuthor.setText(entity.artAuthor);
+        }
     }
 
-//    @Override
-//    public void onRequestAgain() {
+    @Override
+    public void onRequestAgain() {
 //        if (!hasRequested) {
 //            return;
 //        }
@@ -280,7 +287,19 @@ public class DnaInfoActivity extends BaseArtActivity {
 //        } else {
 //            requestDnaInfo();
 //        }
-//    }
+    }
+
+    @Nullable
+    @OnClick(R.id.artCollectInfoLayout)
+    public void toCollectInfoLayout(){
+        toast("收藏信息");
+    }
+
+    @Nullable
+    @OnClick(R.id.artCertificateLayout)
+    public void toCertificateLayout(){
+        toast("相关证书");
+    }
 
     @Override
     public String getTopTitle() {

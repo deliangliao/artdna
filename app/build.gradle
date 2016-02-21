@@ -24,7 +24,7 @@ android {
             // No debug config
         }
         release {
-            storeFile file('E:/Documents/artdna/app/deliangliao.jks')
+            storeFile file('../deliangliao.jks')
             storePassword "815937"
             keyAlias "deliang"
             keyPassword "815937"

@@ -81,10 +81,10 @@ public class DnaInfoActivity extends BaseArtActivity {
 
     @Override
     protected void initData() {
-        showFailLayout("请把卡片放在支持NFC功能的手机背面");
+//        showFailLayout("请把卡片放在支持NFC功能的手机背面");
         initNfc();
         //TODO 模拟NFC测试
-//        processUid("04AFA02A783F80");//认证通过 T00000025
+        processUid("04AFA02A783F80");//认证通过 T00000025
 //        processUid("0491A02A783F80");//认证不通过 T00000028
 //        processUid("0491A011183F80");//认证不通过 乱造的数据
     }
@@ -290,13 +290,13 @@ public class DnaInfoActivity extends BaseArtActivity {
     }
 
     @Nullable
-    @OnClick(R.id.artCollectInfoLayout)
+    @OnClick(R.id.artCollectAuthorLayout)
     public void toCollectInfoLayout(){
         toast("收藏信息");
     }
 
     @Nullable
-    @OnClick(R.id.artCertificateLayout)
+    @OnClick(R.id.artCertificateNameLayout)
     public void toCertificateLayout(){
         toast("相关证书");
     }

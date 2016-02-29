@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:background="@color/gray_text"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="作家信息" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray_text" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            style="@style/black_title.20sp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="作家" />
+
+        <TextView
+            android:id="@+id/artAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="-"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            tools:text="-" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dp"
+        android:background="@color/gray_text" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            style="@style/black_title.20sp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="作家简介" />
+
+        <TextView
+            android:id="@+id/artAuthorDes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="-"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            tools:text="-" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:background="@color/gray_text"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="收藏信息" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray_text" />
+
+    <RelativeLayout
+        android:id="@+id/artCollectAuthorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            style="@style/black_title.20sp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="收藏人" />
+
+        <TextView
+            android:id="@+id/artCollectAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="-"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            tools:text="-" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dp"
+        android:background="@color/gray_text" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            style="@style/black_title.20sp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="简介" />
+
+        <TextView
+            android:id="@+id/artCollectShortInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="-"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            tools:text="-" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dp"
+        android:background="@color/gray_text" />
+
+    <RelativeLayout
+        android:id="@+id/artNameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/artCollectImg"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_alignParentLeft="true"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/artCollectImgName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="图片"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            tools:text="图片" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:background="@color/gray_text"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="相关证书" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray_text" />
+
+    <RelativeLayout
+        android:id="@+id/artCertificateNameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            style="@style/black_title.20sp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="证书名称" />
+
+        <TextView
+            android:id="@+id/artCertificateName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="-"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            tools:text="-" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dp"
+        android:background="@color/gray_text" />
+
+    <RelativeLayout
+        android:id="@+id/artCertificateOrganizationLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            style="@style/black_title.20sp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="颁发机构" />
+
+        <TextView
+            android:id="@+id/artCertificateOrganization"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="-"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            tools:text="-" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="20dp"
+        android:background="@color/gray_text" />
+
+    <RelativeLayout
+        android:id="@+id/artCertificatePapersNameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            style="@style/black_title.20sp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="证件" />
+
+        <TextView
+            android:id="@+id/artCertificatePapersName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="-"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            tools:text="-" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.artdna.R;
+import com.artdna.bean.DNACollectEntity;
 import com.artdna.bean.DNADetailEntity;
 import com.artdna.bean.DNAEntity;
 import com.artdna.config.Urls;
@@ -53,6 +54,20 @@ public class DnaInfoActivity extends BaseArtActivity {
     TextView artModel;
     @Bind(R.id.artAuthor)
     TextView artAuthor;
+    @Bind(R.id.artAuthorInfo)
+    TextView artAuthorInfo;
+    @Bind(R.id.zsmc)
+    TextView zsmc;
+    @Bind(R.id.bfjg)
+    TextView bfjg;
+    @Bind(R.id.zj)
+    TextView zj;
+    @Bind(R.id.artCollectImg)
+    ImageView artCollectImg;
+    @Bind(R.id.collector)
+    TextView collector;
+    @Bind(R.id.artCollectShortInfo)
+    TextView artCollectShortInfo;
 
     //==================== NFC相关参数开始 ====================================
     NfcAdapter nfcAdapter;
@@ -176,6 +191,7 @@ public class DnaInfoActivity extends BaseArtActivity {
                 } else {
                     showAuthInfo();
                     requestDnaInfo();
+                    requestCollectInfo();
                 }
             } catch (Exception e) {
                 Log.e(e.getMessage(), e);
@@ -219,6 +235,15 @@ public class DnaInfoActivity extends BaseArtActivity {
         request.execute();
     }
 
+    private void requestCollectInfo() {
+        showLoadingBar();
+        Request request = new Request(Urls.GET_DNA_COLLECT_INFO_URL());
+//        request.addParameter("artId", mUid);
+        request.addParameter("artId", "5ecc536e5267ca8e015267ce2a46000e");
+        request.setCallback(dnaCollectInfoCallback);
+        request.execute();
+    }
+
     JsonCallback<DNADetailEntity> dnaInfoCallback = new JsonCallback<DNADetailEntity>() {
 
         @Override
@@ -254,25 +279,82 @@ public class DnaInfoActivity extends BaseArtActivity {
 
     };
 
+    JsonCallback<DNACollectEntity> dnaCollectInfoCallback = new JsonCallback<DNACollectEntity>() {
+
+        @Override
+        public void onSuccess(DNACollectEntity result) {
+            hideLoadingBar();
+            if (result == null) {
+                showFailLayout("请求异常，请稍候再试");
+                return;
+            }
+            if (result.RtnCode == 0) {
+                if (!TextUtils.isEmpty(result.RtnMsg)) {
+                    toast(result.RtnMsg);
+                }
+                return;
+            }
+            try {
+                fetchCollectData(result);
+            } catch (Exception e) {
+                Log.e(e.getMessage(), e);
+            }
+        }
+
+        @Override
+        public void onFailure(AppException exception) {
+            showFailLayout("请求异常，请稍候再试");
+            if (exception.getStatus() == AppException.ExceptionStatus.IOException
+                    || exception.getStatus() == AppException.ExceptionStatus.TimeoutException) {
+                toast("网络超时，请稍候再试");
+            } else {
+                toast(exception.getMessage());
+            }
+        }
+
+    };
+
     private void fetchData(DNADetailEntity entity) throws Exception {
         imageLoader.displayImage(Urls.GET_SERVER_ROOT_URL() + entity.imgUrl, artImg);
-        if(!TextUtils.isEmpty(entity.artName)){
+        if (!TextUtils.isEmpty(entity.artName)) {
             artName.setText(entity.artName);
         }
-        if(!TextUtils.isEmpty(entity.ArtType)){
+        if (!TextUtils.isEmpty(entity.ArtType)) {
             artType.setText(entity.ArtType);
         }
-        if(!TextUtils.isEmpty(entity.artAge)){
+        if (!TextUtils.isEmpty(entity.artAge)) {
             artAge.setText(entity.artAge);
         }
-        if(!TextUtils.isEmpty(entity.artPrice)){
+        if (!TextUtils.isEmpty(entity.artPrice)) {
             artPrice.setText(entity.artPrice);
         }
-        if(!TextUtils.isEmpty(entity.artModel)){
+        if (!TextUtils.isEmpty(entity.artModel)) {
             artModel.setText(entity.artModel);
         }
-        if(!TextUtils.isEmpty(entity.artAuthor)){
+        if (!TextUtils.isEmpty(entity.artAuthor)) {
             artAuthor.setText(entity.artAuthor);
+        }
+        if (!TextUtils.isEmpty(entity.artAuthorInfo)) {
+            artAuthorInfo.setText(entity.artAuthorInfo);
+        }
+        if (!TextUtils.isEmpty(entity.certificateName)) {
+            zsmc.setText(entity.certificateName);
+        }
+        if (!TextUtils.isEmpty(entity.issAuthority)) {
+            bfjg.setText(entity.issAuthority);
+        }
+        if (!TextUtils.isEmpty(entity.photo)) {
+            zj.setText(entity.photo);
+        }
+    }
+
+    private void fetchCollectData(DNACollectEntity entity) throws Exception {
+        imageLoader.displayImage(Urls.GET_SERVER_ROOT_URL() + entity.pic, artCollectImg);
+        if (!TextUtils.isEmpty(entity.collector)) {
+            collector.setText(entity.collector);
+        }
+        if (!TextUtils.isEmpty(entity.remark)) {
+            artCollectShortInfo.setText(entity.remark);
         }
     }
 
@@ -291,13 +373,13 @@ public class DnaInfoActivity extends BaseArtActivity {
 
     @Nullable
     @OnClick(R.id.artCollectAuthorLayout)
-    public void toCollectInfoLayout(){
+    public void toCollectInfoLayout() {
         toast("收藏信息");
     }
 
     @Nullable
     @OnClick(R.id.artCertificateNameLayout)
-    public void toCertificateLayout(){
+    public void toCertificateLayout() {
         toast("相关证书");
     }
 

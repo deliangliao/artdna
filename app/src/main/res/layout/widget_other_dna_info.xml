@@ -66,7 +66,7 @@
             android:text="作家简介" />
 
         <TextView
-            android:id="@+id/artAuthorDes"
+            android:id="@+id/artAuthorInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -108,7 +108,7 @@
             android:text="收藏人" />
 
         <TextView
-            android:id="@+id/artCollectAuthor"
+            android:id="@+id/collector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -211,6 +211,7 @@
         android:paddingTop="20dp">
 
         <TextView
+            android:id="@+id/zsmc"
             style="@style/black_title.20sp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
@@ -245,6 +246,7 @@
         android:paddingTop="20dp">
 
         <TextView
+            android:id="@+id/bfjg"
             style="@style/black_title.20sp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
@@ -279,6 +281,7 @@
         android:paddingTop="20dp">
 
         <TextView
+            android:id="@+id/zj"
             style="@style/black_title.20sp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"

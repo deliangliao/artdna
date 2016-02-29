@@ -1,7 +1,6 @@
 package com.artdna.config;
 
 public class Urls {
-
 	public static final String URL_SERVER_IP = "222.76.211.238"; // 正式
 	public static final String URL_SERVER_PORT = "8080"; // 正式
 
@@ -26,6 +25,13 @@ public class Urls {
      */
     public static String GET_DNA_INFO_URL() {
         return GET_SERVER_ROOT_URL() + "HomYGJ/art_manage/getProductByDNATarget.do";
+    }
+
+    /**
+     * 获取艺术品收藏信息
+     */
+    public static String GET_DNA_COLLECT_INFO_URL() {
+        return GET_SERVER_ROOT_URL() + "HomYGJ/art_manage/getArtCollectioByArtId.htm";
     }
 	
 }

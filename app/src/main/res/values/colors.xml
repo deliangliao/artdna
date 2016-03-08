@@ -2,5 +2,19 @@
 <resources>
 
     <color name="blue">#1d7799</color>
+    <color name="title_color">#333333</color> <!-- 标题颜色 -->
+    <color name="text_color">#666666</color> <!-- 正文颜色 -->
+
+    <!-- 通用 -->
+    <color name="white">#ffffffff</color> <!-- 白色 -->
+    <color name="black">#ff000000</color> <!-- 黑色 -->
+    <color name="gray">#7d7d7d</color>
+    <color name="gray_dark">#aaaaaa</color>
+    <color name="light_gray">#dddddd</color>
+    <color name="light_gray_bbbbbb">#bbbbbb</color>
+    <color name="transparent">#00000000</color> <!-- 透明色 -->
+    <color name="transparent_black">#80000000</color> <!-- 透明黑 -->
+    <color name="list_divider_line">#e5e5e5</color>
+    <color name="deep_blue">#0099e6</color><!-- 深蓝 -->
 
 </resources>

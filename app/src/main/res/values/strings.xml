@@ -1,7 +1,10 @@
 <resources>
 
     <string name="app_name">艺管家</string>
-
+    <string name="tab_home">首页</string>
+    <string name="tab_members">会员</string>
+    <string name="tab_info">资讯</string>
+    <string name="tab_setting">设置</string>
     <string name="alert_card_mac_blank">该卡无效，请重新刷卡！</string>
 
 </resources>

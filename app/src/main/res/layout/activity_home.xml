@@ -37,8 +37,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_grid_ic"
-                    android:gravity="center">
+                    android:background="@color/grid_item_color_1"
+                    android:gravity="center"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -47,27 +49,29 @@
                         android:drawableTop="@drawable/ic_dna"
                         android:gravity="center"
                         android:text="艺术品DNA"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/ic_data_manager"
+                    android:id="@+id/ic_dsjgl"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_grid_ic"
-                    android:gravity="center">
+                    android:background="@color/grid_item_color_2"
+                    android:gravity="center"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
-                        android:drawableTop="@drawable/ic_member"
+                        android:drawableTop="@drawable/ic_dsjgl"
                         android:gravity="center"
                         android:text="大数据管理"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -78,17 +82,19 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_grid_ic"
-                    android:gravity="center">
+                    android:background="@color/grid_item_color_3"
+                    android:gravity="center"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
-                        android:drawableTop="@drawable/ic_hall"
+                        android:drawableTop="@drawable/ic_xxjy"
                         android:gravity="center"
                         android:text="线上交易"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -106,17 +112,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_grid_ic"
-                    android:gravity="center">
+                    android:background="@color/grid_item_color_4"
+                    android:gravity="center"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
-                        android:drawableTop="@drawable/ic_info"
+                        android:drawableTop="@drawable/ic_xxjy"
                         android:gravity="center"
                         android:text="线下交易"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -126,17 +134,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_grid_ic"
-                    android:gravity="center">
+                    android:background="@color/grid_item_color_5"
+                    android:gravity="center"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
-                        android:drawableTop="@drawable/ic_service"
+                        android:drawableTop="@drawable/ic_pm"
                         android:gravity="center"
                         android:text="拍卖"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -147,17 +157,19 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_grid_ic"
-                    android:gravity="center">
+                    android:background="@color/grid_item_color_6"
+                    android:gravity="center"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
-                        android:drawableTop="@drawable/ic_finance"
+                        android:drawableTop="@drawable/ic_zydk"
                         android:gravity="center"
                         android:text="质押贷款"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -175,17 +187,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_grid_ic"
-                    android:gravity="center">
+                    android:background="@color/grid_item_color_7"
+                    android:gravity="center"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
-                        android:drawableTop="@drawable/ic_appraisal"
+                        android:drawableTop="@drawable/ic_jrfw"
                         android:gravity="center"
                         android:text="金融服务"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -195,17 +209,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_grid_ic"
-                    android:gravity="center">
+                    android:background="@color/grid_item_color_8"
+                    android:gravity="center"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
-                        android:drawableTop="@drawable/ic_assessment"
+                        android:drawableTop="@drawable/ic_jdpg"
                         android:gravity="center"
                         android:text="鉴定评估"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -216,17 +232,19 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_grid_ic"
-                    android:gravity="center">
+                    android:background="@color/grid_item_color_9"
+                    android:gravity="center"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="10dp"
-                        android:drawableTop="@drawable/ic_setting"
+                        android:drawableTop="@drawable/ic_pxjl"
                         android:gravity="center"
                         android:text="培训交流"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
                 </LinearLayout>
 

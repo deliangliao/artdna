@@ -22,11 +22,10 @@ public class MainActivity extends TabActivity {
 
     public static TabHost mTabHost;
 
-    // 首页 社区 生活 我的
     String TAB_HOME = "homepage";
-    String TAB_COMMUNITY = "community";
-    String TAB_LIFE = "life";
-    String TAB_MINE = "mine";
+    String TAB_MEMBERS = "members";
+    String TAB_INFO = "info";
+    String TAB_SETTING = "setting";
     public static int CLICK_TAB = 0; //发送广播页
     View[] view = new View[4];
 
@@ -51,16 +50,16 @@ public class MainActivity extends TabActivity {
 
         view[1] = createTabView(getApplicationContext(), R.drawable.main_tabbg_members,
                 getString(R.string.tab_members));
-        TabSpec tab1 = mTabHost.newTabSpec(TAB_COMMUNITY).setIndicator(view[1])
+        TabSpec tab1 = mTabHost.newTabSpec(TAB_MEMBERS).setIndicator(view[1])
                 .setContent(new Intent(this, MembersActivity.class));
 
         view[2] = createTabView(getApplicationContext(), R.drawable.main_tabbg_info,
                 getString(R.string.tab_info));
-        TabSpec tab2 = mTabHost.newTabSpec(TAB_LIFE).setIndicator(view[2])
+        TabSpec tab2 = mTabHost.newTabSpec(TAB_INFO).setIndicator(view[2])
                 .setContent(new Intent(this, InfoActivity.class));
 
         view[3] = createTabView(getApplicationContext(), R.drawable.main_tabbg_setting, getString(R.string.tab_setting));
-        TabSpec tab3 = mTabHost.newTabSpec(TAB_MINE).setIndicator(view[3])
+        TabSpec tab3 = mTabHost.newTabSpec(TAB_SETTING).setIndicator(view[3])
                 .setContent(new Intent(this, SettingsActivity.class));
 
         mTabHost.addTab(tab0);

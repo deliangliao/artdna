@@ -76,20 +76,9 @@ public class HomeActivity extends BaseArtActivity {
         return "艺管家";
     }
 
-//    private long exitTime = 0;
-//
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK
-//                && event.getAction() == KeyEvent.ACTION_DOWN) {
-//            if ((System.currentTimeMillis() - exitTime) > 2000) {
-//                Toast.makeText(getApplicationContext(), "再按一次后退键退出app", Toast.LENGTH_SHORT).show();
-//                exitTime = System.currentTimeMillis();
-//            } else {
-//                CommonUtils.doExit(mContext);
-//            }
-//            return true;
-//        }
-//        return super.onKeyDown(keyCode, event);
-//    }
+    @OnClick({R.id.top_right, R.id.ic_dsjgl, R.id.ic_xxjy, R.id.ic_xsjy, R.id.ic_pm, R.id.ic_zydk, R.id.ic_jrfw, R.id.ic_jdpg, R.id.ic_pxjl})
+    public void toastMsg() {
+        toast("让艺术品都流通起来");
+    }
+
 }

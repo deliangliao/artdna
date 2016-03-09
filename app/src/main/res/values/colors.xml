@@ -2,6 +2,16 @@
 <resources>
 
     <color name="blue">#1d7799</color>
+    <color name="grid_item_color_1">#00B8FF</color>
+    <color name="grid_item_color_2">#747AE8</color>
+    <color name="grid_item_color_3">#FF687B</color>
+    <color name="grid_item_color_4">#0fc4d9</color>
+    <color name="grid_item_color_5">#84d018</color>
+    <color name="grid_item_color_6">#fe864a</color>
+    <color name="grid_item_color_7">#f4b613</color>
+    <color name="grid_item_color_8">#ea786e</color>
+    <color name="grid_item_color_9">#6fc8ea</color>
+
     <color name="title_color">#333333</color> <!-- 标题颜色 -->
     <color name="text_color">#666666</color> <!-- 正文颜色 -->
 

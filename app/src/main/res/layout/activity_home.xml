@@ -46,13 +46,13 @@
                         android:drawablePadding="10dp"
                         android:drawableTop="@drawable/ic_dna"
                         android:gravity="center"
-                        android:text="DNA"
+                        android:text="艺术品DNA"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/ic_member"
+                    android:id="@+id/ic_data_manager"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -66,13 +66,13 @@
                         android:drawablePadding="10dp"
                         android:drawableTop="@drawable/ic_member"
                         android:gravity="center"
-                        android:text="会员"
+                        android:text="大数据管理"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/ic_hall"
+                    android:id="@+id/ic_xsjy"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -87,7 +87,7 @@
                         android:drawablePadding="10dp"
                         android:drawableTop="@drawable/ic_hall"
                         android:gravity="center"
-                        android:text="展馆"
+                        android:text="线上交易"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -101,7 +101,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/ic_info"
+                    android:id="@+id/ic_xxjy"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -115,13 +115,13 @@
                         android:drawablePadding="10dp"
                         android:drawableTop="@drawable/ic_info"
                         android:gravity="center"
-                        android:text="资讯"
+                        android:text="线下交易"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/ic_service"
+                    android:id="@+id/ic_pm"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -135,13 +135,13 @@
                         android:drawablePadding="10dp"
                         android:drawableTop="@drawable/ic_service"
                         android:gravity="center"
-                        android:text="客服"
+                        android:text="拍卖"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/ic_finance"
+                    android:id="@+id/ic_zydk"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -156,7 +156,7 @@
                         android:drawablePadding="10dp"
                         android:drawableTop="@drawable/ic_finance"
                         android:gravity="center"
-                        android:text="金融"
+                        android:text="质押贷款"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -170,7 +170,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:id="@+id/ic_appraisal"
+                    android:id="@+id/ic_jrfw"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -184,13 +184,13 @@
                         android:drawablePadding="10dp"
                         android:drawableTop="@drawable/ic_appraisal"
                         android:gravity="center"
-                        android:text="鉴定"
+                        android:text="金融服务"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/ic_assessment"
+                    android:id="@+id/ic_jdpg"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -204,13 +204,13 @@
                         android:drawablePadding="10dp"
                         android:drawableTop="@drawable/ic_assessment"
                         android:gravity="center"
-                        android:text="鉴定"
+                        android:text="鉴定评估"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/ic_setting"
+                    android:id="@+id/ic_pxjl"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -225,7 +225,7 @@
                         android:drawablePadding="10dp"
                         android:drawableTop="@drawable/ic_setting"
                         android:gravity="center"
-                        android:text="设置"
+                        android:text="培训交流"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>

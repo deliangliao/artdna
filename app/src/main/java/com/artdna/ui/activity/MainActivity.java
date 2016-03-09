@@ -123,12 +123,11 @@ public class MainActivity extends TabActivity {
         return view;
     }
 
-    private long exitTime = 0;
+    long exitTime = 0;
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK
-                && event.getAction() == KeyEvent.ACTION_DOWN) {
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if ((System.currentTimeMillis() - exitTime) > 2000) {
                 Toast.makeText(getApplicationContext(), "再按一次后退键退出app", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
@@ -137,7 +136,7 @@ public class MainActivity extends TabActivity {
             }
             return true;
         }
-        return super.onKeyDown(keyCode, event);
+        return super.dispatchKeyEvent(event);
     }
 
 }

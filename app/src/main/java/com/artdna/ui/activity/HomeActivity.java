@@ -73,7 +73,7 @@ public class HomeActivity extends BaseArtActivity {
 
     @Override
     public String getTopTitle() {
-        return "首页";
+        return "艺管家";
     }
 
 //    private long exitTime = 0;

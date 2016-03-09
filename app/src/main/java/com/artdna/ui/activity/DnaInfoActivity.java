@@ -8,8 +8,10 @@ import android.nfc.Tag;
 import android.nfc.tech.NfcF;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.artdna.R;
@@ -60,14 +62,10 @@ public class DnaInfoActivity extends BaseArtActivity {
     TextView zsmc;
     @Bind(R.id.bfjg)
     TextView bfjg;
-    @Bind(R.id.zj)
-    TextView zj;
-    @Bind(R.id.artCollectImg)
-    ImageView artCollectImg;
-    @Bind(R.id.collector)
-    TextView collector;
-    @Bind(R.id.artCollectShortInfo)
-    TextView artCollectShortInfo;
+    @Bind(R.id.collectInfoContainer)
+    LinearLayout collectContainer;
+    @Bind(R.id.zjContainer)
+    LinearLayout zjContainer;
 
     //==================== NFC相关参数开始 ====================================
     NfcAdapter nfcAdapter;
@@ -99,6 +97,7 @@ public class DnaInfoActivity extends BaseArtActivity {
         showFailLayout("请把卡片放在支持NFC功能的手机背面");
         initNfc();
         //TODO 模拟NFC测试
+        processUid("0464A02A783F80");//认证通过 T00000051
 //        processUid("04AFA02A783F80");//认证通过 T00000025
 //        processUid("0491A02A783F80");//认证不通过 T00000028
 //        processUid("0491A011183F80");//认证不通过 乱造的数据
@@ -200,7 +199,7 @@ public class DnaInfoActivity extends BaseArtActivity {
 
         @Override
         public void onFailure(AppException exception) {
-            showFailLayout("请求异常，请稍候再试");
+//            showFailLayout("请求异常，请稍候再试");
             if (exception.getStatus() == AppException.ExceptionStatus.IOException
                     || exception.getStatus() == AppException.ExceptionStatus.TimeoutException) {
                 toast("网络超时，请稍候再试");
@@ -238,7 +237,7 @@ public class DnaInfoActivity extends BaseArtActivity {
     private void requestCollectInfo() {
         showLoadingBar();
         Request request = new Request(Urls.GET_DNA_COLLECT_INFO_URL());
-        request.addParameter("artId", mUid);
+        request.addParameter("dnaId", mDnaId);
 //        request.addParameter("artId", "5ecc536e5267ca8e015267ce2a46000e");
         request.setCallback(dnaCollectInfoCallback);
         request.execute();
@@ -268,7 +267,7 @@ public class DnaInfoActivity extends BaseArtActivity {
 
         @Override
         public void onFailure(AppException exception) {
-            showFailLayout("请求异常，请稍候再试");
+//            showFailLayout("请求异常，请稍候再试");
             if (exception.getStatus() == AppException.ExceptionStatus.IOException
                     || exception.getStatus() == AppException.ExceptionStatus.TimeoutException) {
                 toast("网络超时，请稍候再试");
@@ -303,7 +302,7 @@ public class DnaInfoActivity extends BaseArtActivity {
 
         @Override
         public void onFailure(AppException exception) {
-            showFailLayout("请求异常，请稍候再试");
+//            showFailLayout("请求异常，请稍候再试");
             if (exception.getStatus() == AppException.ExceptionStatus.IOException
                     || exception.getStatus() == AppException.ExceptionStatus.TimeoutException) {
                 toast("网络超时，请稍候再试");
@@ -344,18 +343,41 @@ public class DnaInfoActivity extends BaseArtActivity {
             bfjg.setText(entity.issAuthority);
         }
         if (!TextUtils.isEmpty(entity.photo)) {
-            zj.setText(entity.photo);
+            LinearLayout itemView = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.widget_item_dna_zj, null);
+            ImageView zjIv = (ImageView) itemView.findViewById(R.id.zjImg);
+            imageLoader.displayImage(Urls.GET_SERVER_ROOT_URL() + entity.photo, zjIv);
+            zjContainer.addView(itemView);
+        }
+        if (!TextUtils.isEmpty(entity.photos)) {
+            String[] imgUrls = entity.photos.split(",");
+            if (imgUrls != null && imgUrls.length > 1) {
+                for (int i = 1; i < imgUrls.length; i++) {
+                    LinearLayout itemView = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.widget_item_dna_zj, null);
+                    ImageView zjIv = (ImageView) itemView.findViewById(R.id.zjImg);
+                    imageLoader.displayImage(Urls.GET_SERVER_ROOT_URL() + entity.photo, zjIv);
+                    zjContainer.addView(itemView);
+                }
+            }
+
         }
     }
 
     private void fetchCollectData(DNACollectEntity entity) throws Exception {
-        imageLoader.displayImage(Urls.GET_SERVER_ROOT_URL() + entity.pic, artCollectImg);
-        if (!TextUtils.isEmpty(entity.collector)) {
-            collector.setText(entity.collector);
+        for (final DNACollectEntity.CollectItem item : entity.data) {
+            LinearLayout itemView = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.widget_item_collect_dna_info, null);
+            TextView collectorTv = (TextView) itemView.findViewById(R.id.collector);
+            TextView shortInfoTv = (TextView) itemView.findViewById(R.id.artCollectShortInfo);
+            ImageView collectIv = (ImageView) itemView.findViewById(R.id.artCollectImg);
+            if (!TextUtils.isEmpty(item.collector)) {
+                collectorTv.setText(item.collector + "(" + item.startDate + " 至 " + item.endDate + ")");
+            }
+            if (!TextUtils.isEmpty(item.remark)) {
+                shortInfoTv.setText(item.remark);
+            }
+            imageLoader.displayImage(Urls.GET_SERVER_ROOT_URL() + item.pic, collectIv);
+            collectContainer.addView(itemView);
         }
-        if (!TextUtils.isEmpty(entity.remark)) {
-            artCollectShortInfo.setText(entity.remark);
-        }
+
     }
 
     @Override
@@ -371,20 +393,14 @@ public class DnaInfoActivity extends BaseArtActivity {
 //        }
     }
 
-    @Nullable
-    @OnClick(R.id.artCollectAuthorLayout)
-    public void toCollectInfoLayout() {
-        toast("收藏信息");
-    }
-
-    @Nullable
-    @OnClick(R.id.artCertificateNameLayout)
-    public void toCertificateLayout() {
-        toast("相关证书");
-    }
-
     @Override
     public String getTopTitle() {
         return "艺术品DNA";
+    }
+
+    @Nullable
+    @OnClick({R.id.top_right})
+    public void toastMsg() {
+        toast("让艺术品都流通起来");
     }
 }

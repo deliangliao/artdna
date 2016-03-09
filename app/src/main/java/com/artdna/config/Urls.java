@@ -27,11 +27,19 @@ public class Urls {
         return GET_SERVER_ROOT_URL() + "HomYGJ/art_manage/getProductByDNATarget.do";
     }
 
+//    /**
+//     * 获取艺术品收藏信息
+//     */
+//    public static String GET_DNA_COLLECT_INFO_URL() {
+//        return GET_SERVER_ROOT_URL() + "HomYGJ/art_manage/getArtCollectioByArtId.htm";
+//    }
+
     /**
      * 获取艺术品收藏信息
+     * http://222.76.211.238:8080/HomYGJ/art_manage/getArtCollectioByDnaId.htm?dnaId=T00000051
      */
     public static String GET_DNA_COLLECT_INFO_URL() {
-        return GET_SERVER_ROOT_URL() + "HomYGJ/art_manage/getArtCollectioByArtId.htm";
+        return GET_SERVER_ROOT_URL() + "HomYGJ/art_manage/getArtCollectioByDnaId.htm";
     }
 	
 }

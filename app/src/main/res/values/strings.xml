@@ -7,4 +7,10 @@
     <string name="tab_setting">设置</string>
     <string name="alert_card_mac_blank">该卡无效，请重新刷卡！</string>
 
+    <string name="action_refresh">刷新</string>
+    <string name="action_copy_url">复制链接</string>
+    <string name="action_open_url">打开链接</string>
+    <string name="toast_open_fail">打开失败，没有找到可以打开该链接的其它应用 :(</string>
+    <string name="toast_copy_done">复制成功</string>
+
 </resources>

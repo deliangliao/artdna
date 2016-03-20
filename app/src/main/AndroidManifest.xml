@@ -43,6 +43,12 @@
         <activity
             android:name=".ui.activity.DnaInfoActivity"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.activity.WebActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.activity.ViewImageActivity"
+            android:launchMode="singleTask" />
 
         <!-- ************************* 友盟START  **************************** -->
         <meta-data

@@ -2,6 +2,7 @@ package com.artdna.ui.activity;
 
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Bundle;
 import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
@@ -18,6 +19,7 @@ import com.artdna.R;
 import com.artdna.bean.DNACollectEntity;
 import com.artdna.bean.DNADetailEntity;
 import com.artdna.bean.DNAEntity;
+import com.artdna.config.ArtKey;
 import com.artdna.config.Urls;
 import com.artdna.ui.base.BaseArtActivity;
 import com.artdna.utils.NFCUtils;
@@ -313,8 +315,14 @@ public class DnaInfoActivity extends BaseArtActivity {
 
     };
 
-    private void fetchData(DNADetailEntity entity) throws Exception {
+    private void fetchData(final DNADetailEntity entity) throws Exception {
         imageLoader.displayImage(Urls.GET_SERVER_ROOT_URL() + entity.imgUrl, artImg);
+        artImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doShowImg(Urls.GET_SERVER_ROOT_URL() + entity.imgUrl);
+            }
+        });
         if (!TextUtils.isEmpty(entity.artName)) {
             artName.setText(entity.artName);
         }
@@ -347,15 +355,28 @@ public class DnaInfoActivity extends BaseArtActivity {
             ImageView zjIv = (ImageView) itemView.findViewById(R.id.zjImg);
             imageLoader.displayImage(Urls.GET_SERVER_ROOT_URL() + entity.photo, zjIv);
             zjContainer.addView(itemView);
+            zjIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    doShowImg(Urls.GET_SERVER_ROOT_URL() + entity.photo);
+                }
+            });
         }
         if (!TextUtils.isEmpty(entity.photos)) {
-            String[] imgUrls = entity.photos.split(",");
+            String[] imgUrls = entity.photos.split(",");//接口第一个就返回逗号
             if (imgUrls != null && imgUrls.length > 1) {
                 for (int i = 1; i < imgUrls.length; i++) {
                     LinearLayout itemView = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.widget_item_dna_zj, null);
                     ImageView zjIv = (ImageView) itemView.findViewById(R.id.zjImg);
-                    imageLoader.displayImage(Urls.GET_SERVER_ROOT_URL() + entity.photo, zjIv);
+                    final String imageUrl = Urls.GET_SERVER_ROOT_URL() + imgUrls[i];
+                    imageLoader.displayImage(imageUrl, zjIv);
                     zjContainer.addView(itemView);
+                    zjIv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            doShowImg(imageUrl);
+                        }
+                    });
                 }
             }
 
@@ -375,6 +396,12 @@ public class DnaInfoActivity extends BaseArtActivity {
                 shortInfoTv.setText(item.remark);
             }
             imageLoader.displayImage(Urls.GET_SERVER_ROOT_URL() + item.pic, collectIv);
+            collectIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    doShowImg(Urls.GET_SERVER_ROOT_URL() + item.pic);
+                }
+            });
             collectContainer.addView(itemView);
         }
 
@@ -396,6 +423,23 @@ public class DnaInfoActivity extends BaseArtActivity {
     @Override
     public String getTopTitle() {
         return "艺术品DNA";
+    }
+
+    @Nullable
+    @OnClick({R.id.support_tech})
+    public void supportTech() {
+        Intent intent = new Intent(mContext, WebActivity.class);
+        intent.putExtra(ArtKey.KEY_INTENT_WEB_URL, "http://www.bk-easy.com");
+        startActivity(intent);
+    }
+
+    public void doShowImg(String imgPath) {
+        Intent intent = new Intent(mContext, ViewImageActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putStringArray("urls", new String[]{imgPath});
+        bundle.putInt("index", 0);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Nullable

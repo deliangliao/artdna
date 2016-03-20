@@ -246,6 +246,16 @@
 
             <include layout="@layout/widget_other_dna_info" />
 
+            <TextView
+                android:id="@+id/support_tech"
+                style="@style/black_title.16sp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="技术支持：北科易斯" />
+
         </LinearLayout>
     </ScrollView>
 

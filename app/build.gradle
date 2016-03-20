@@ -86,4 +86,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.daimajia.numberprogressbar:library:1.2'
     compile 'com.jude:rollviewpager:1.2.4'
+    compile 'com.github.chrisbanes.photoview:library:1.2.4'
 }

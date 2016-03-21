@@ -23,6 +23,7 @@ public abstract class BaseToolbarActivity extends BaseArtActivity {
 
         mAppBar = (AppBarLayout) findViewById(R.id.app_bar_layout);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setNavigationIcon(R.drawable.btn_back_selector);
 
         if (mToolbar == null || mAppBar == null) {
             throw new IllegalStateException("No toolbar");

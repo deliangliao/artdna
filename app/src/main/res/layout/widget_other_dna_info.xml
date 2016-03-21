@@ -74,11 +74,11 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/zjjj"
-            android:gravity="right"
+            android:gravity="left"
             android:text="-"
             android:textColor="@color/blue"
             android:textSize="16sp"
-            tools:text="生大发顺丰啊发顺丰" />
+            tools:text="我们都是这时代的悲剧产物！难道你们不这么觉得吗？可以吗！不是吗？？" />
 
     </RelativeLayout>
 

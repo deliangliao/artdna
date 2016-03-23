@@ -2,11 +2,15 @@ package com.artdna.ui.activity;
 
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.NfcF;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -28,6 +32,8 @@ import com.shengshi.base.tools.Log;
 import com.shengshi.http.net.AppException;
 import com.shengshi.http.net.Request;
 import com.shengshi.http.net.callback.JsonCallback;
+
+import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -83,6 +89,11 @@ public class DnaInfoActivity extends BaseArtActivity {
     String mDnaId = "";
     boolean hasRequested = false;
 
+    private static final float BEEP_VOLUME = 0.50f;
+    MediaPlayer mediaPlayer;
+    boolean playBeep;
+    boolean vibrate = true;
+
     @Override
     protected int getMainContentViewId() {
         return R.layout.activity_dna_info;
@@ -99,7 +110,7 @@ public class DnaInfoActivity extends BaseArtActivity {
         showFailLayout("请把卡片放在支持NFC功能的手机背面");
         initNfc();
         //TODO 模拟NFC测试
-        processUid("0464A02A783F80");//认证通过 T00000051
+//        processUid("0464A02A783F80");//认证通过 T00000051
 //        processUid("04AFA02A783F80");//认证通过 T00000025
 //        processUid("0491A02A783F80");//认证不通过 T00000028
 //        processUid("0491A011183F80");//认证不通过 乱造的数据
@@ -107,8 +118,7 @@ public class DnaInfoActivity extends BaseArtActivity {
 
     private void initNfc() {
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        mPendingIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        mPendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         IntentFilter tag = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
         IntentFilter tech = new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED);
         IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
@@ -121,6 +131,13 @@ public class DnaInfoActivity extends BaseArtActivity {
         super.onResume();
         if (nfcAdapter != null)
             nfcAdapter.enableForegroundDispatch(this, mPendingIntent, mFilters, mTechLists);
+        playBeep = true;
+        vibrate = true;
+        AudioManager audioService = (AudioManager) getSystemService(AUDIO_SERVICE);
+        if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
+            playBeep = false;
+        }
+        initBeepSound();
     }
 
     @Override
@@ -190,6 +207,7 @@ public class DnaInfoActivity extends BaseArtActivity {
                 if (TextUtils.isEmpty(mDnaId)) {
                     showUnAuthInfo();
                 } else {
+                    playBeepSoundAndVibrate();
                     showAuthInfo();
                     requestDnaInfo();
                     requestCollectInfo();
@@ -202,8 +220,7 @@ public class DnaInfoActivity extends BaseArtActivity {
         @Override
         public void onFailure(AppException exception) {
 //            showFailLayout("请求异常，请稍候再试");
-            if (exception.getStatus() == AppException.ExceptionStatus.IOException
-                    || exception.getStatus() == AppException.ExceptionStatus.TimeoutException) {
+            if (exception.getStatus() == AppException.ExceptionStatus.IOException || exception.getStatus() == AppException.ExceptionStatus.TimeoutException) {
                 toast("网络超时，请稍候再试");
             } else {
                 toast(exception.getMessage());
@@ -270,8 +287,7 @@ public class DnaInfoActivity extends BaseArtActivity {
         @Override
         public void onFailure(AppException exception) {
 //            showFailLayout("请求异常，请稍候再试");
-            if (exception.getStatus() == AppException.ExceptionStatus.IOException
-                    || exception.getStatus() == AppException.ExceptionStatus.TimeoutException) {
+            if (exception.getStatus() == AppException.ExceptionStatus.IOException || exception.getStatus() == AppException.ExceptionStatus.TimeoutException) {
                 toast("网络超时，请稍候再试");
             } else {
                 toast(exception.getMessage());
@@ -305,8 +321,7 @@ public class DnaInfoActivity extends BaseArtActivity {
         @Override
         public void onFailure(AppException exception) {
 //            showFailLayout("请求异常，请稍候再试");
-            if (exception.getStatus() == AppException.ExceptionStatus.IOException
-                    || exception.getStatus() == AppException.ExceptionStatus.TimeoutException) {
+            if (exception.getStatus() == AppException.ExceptionStatus.IOException || exception.getStatus() == AppException.ExceptionStatus.TimeoutException) {
                 toast("网络超时，请稍候再试");
             } else {
                 toast(exception.getMessage());
@@ -440,6 +455,49 @@ public class DnaInfoActivity extends BaseArtActivity {
         bundle.putInt("index", 0);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    private void initBeepSound() {
+        if (playBeep && mediaPlayer == null) {
+            setVolumeControlStream(AudioManager.STREAM_MUSIC);
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mediaPlayer.setOnCompletionListener(beepListener);
+
+            AssetFileDescriptor file = getResources().openRawResourceFd(R.raw.success);
+            try {
+                mediaPlayer.setDataSource(file.getFileDescriptor(), file.getStartOffset(), file.getLength());
+                file.close();
+                mediaPlayer.setVolume(BEEP_VOLUME, BEEP_VOLUME);
+                mediaPlayer.prepare();
+            } catch (IOException e) {
+                mediaPlayer = null;
+            }
+        }
+    }
+
+    private void playBeepSoundAndVibrate() {
+        if (playBeep && mediaPlayer != null) {
+            mediaPlayer.start();
+        }
+        if (vibrate) {
+            Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+            vibrator.vibrate(200);
+        }
+    }
+
+    private final MediaPlayer.OnCompletionListener beepListener = new MediaPlayer.OnCompletionListener() {
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            mediaPlayer.seekTo(0);
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+        }
     }
 
     @Nullable

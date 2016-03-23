@@ -4,6 +4,15 @@ def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
 }
 
+def releaseTimestamp() {
+//    def date = new Date()
+//    def formattedDate = date.format('yyyyMMddHHmmss')
+//    return formattedDate
+    def Calendar cal = Calendar.getInstance()
+    return cal.getTimeInMillis().toString()
+}
+
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"

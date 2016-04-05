@@ -26,6 +26,12 @@ public class Urls {
     public static String GET_DNA_INFO_URL() {
         return GET_SERVER_ROOT_URL() + "HomYGJ/art_manage/getProductByDNATarget.do";
     }
+    /**
+     * 从通宝商城接口，获取艺术品信息
+     */
+    public static String GET_DNA_INFO_URL_BY_TONG_BAO() {
+        return "http://tongb.cn/ECW-MallMgt/commodity_com/getProductByDNATarget.ihtml";
+    }
 
 //    /**
 //     * 获取艺术品收藏信息

@@ -23,6 +23,7 @@ import com.artdna.R;
 import com.artdna.bean.DNACollectEntity;
 import com.artdna.bean.DNADetailEntity;
 import com.artdna.bean.DNAEntity;
+import com.artdna.bean.TongbaoDNADetailEntity;
 import com.artdna.config.ArtKey;
 import com.artdna.config.Urls;
 import com.artdna.ui.base.BaseArtActivity;
@@ -74,6 +75,8 @@ public class DnaInfoActivity extends BaseArtActivity {
     LinearLayout collectContainer;
     @Bind(R.id.zjContainer)
     LinearLayout zjContainer;
+    @Bind(R.id.dna_other_info_rootview)
+    View otherInfoLayout;
 
     //==================== NFC相关参数开始 ====================================
     NfcAdapter nfcAdapter;
@@ -185,7 +188,7 @@ public class DnaInfoActivity extends BaseArtActivity {
         hasRequested = true;
     }
 
-    JsonCallback<DNAEntity> jsonCallback = new JsonCallback<DNAEntity>() {
+    JsonCallback<DNAEntity> jsonCallback = new CommonJsonCallback<DNAEntity>() {
 
         @Override
         public void onSuccess(DNAEntity result) {
@@ -209,21 +212,14 @@ public class DnaInfoActivity extends BaseArtActivity {
                 } else {
                     playBeepSoundAndVibrate();
                     showAuthInfo();
+                    //TODO 测试，发布删掉下面两行
+//                    requestDnaInfoByTongbao();
+//                    otherInfoLayout.setVisibility(View.GONE);
                     requestDnaInfo();
                     requestCollectInfo();
                 }
             } catch (Exception e) {
                 Log.e(e.getMessage(), e);
-            }
-        }
-
-        @Override
-        public void onFailure(AppException exception) {
-//            showFailLayout("请求异常，请稍候再试");
-            if (exception.getStatus() == AppException.ExceptionStatus.IOException || exception.getStatus() == AppException.ExceptionStatus.TimeoutException) {
-                toast("网络超时，请稍候再试");
-            } else {
-                toast(exception.getMessage());
             }
         }
 
@@ -253,6 +249,16 @@ public class DnaInfoActivity extends BaseArtActivity {
         request.execute();
     }
 
+    private void requestDnaInfoByTongbao() {
+        showLoadingBar();
+        Request request = new Request(Urls.GET_DNA_INFO_URL_BY_TONG_BAO());
+        //TODO 通宝商城接口测试
+//        request.addParameter("LableId", "T000000011");
+        request.addParameter("LableId", mDnaId);
+        request.setCallback(tongbaoDnaInfoCallback);
+        request.execute();
+    }
+
     private void requestCollectInfo() {
         showLoadingBar();
         Request request = new Request(Urls.GET_DNA_COLLECT_INFO_URL());
@@ -262,19 +268,22 @@ public class DnaInfoActivity extends BaseArtActivity {
         request.execute();
     }
 
-    JsonCallback<DNADetailEntity> dnaInfoCallback = new JsonCallback<DNADetailEntity>() {
+    JsonCallback<DNADetailEntity> dnaInfoCallback = new CommonJsonCallback<DNADetailEntity>() {
 
         @Override
         public void onSuccess(DNADetailEntity result) {
             hideLoadingBar();
             if (result == null) {
-                showFailLayout("请求异常，请稍候再试");
+//                showFailLayout("请求异常，请稍候再试");
                 return;
             }
             if (result.RtnCode == 0) {
-                if (!TextUtils.isEmpty(result.RtnMsg)) {
-                    toast(result.RtnMsg);
-                }
+//                if (!TextUtils.isEmpty(result.RtnMsg)) {
+//                    toast(result.RtnMsg);
+//                }
+                //读取芯片时，如果从艺术品信息接口获取不到信息就从通宝商城接口获取，展示内容只有作家信息上面那些，其他包括作家信息全部不要
+                requestDnaInfoByTongbao();
+                otherInfoLayout.setVisibility(View.GONE);
                 return;
             }
             try {
@@ -284,25 +293,39 @@ public class DnaInfoActivity extends BaseArtActivity {
             }
         }
 
+    };
+
+    JsonCallback<TongbaoDNADetailEntity> tongbaoDnaInfoCallback = new CommonJsonCallback<TongbaoDNADetailEntity>() {
+
         @Override
-        public void onFailure(AppException exception) {
-//            showFailLayout("请求异常，请稍候再试");
-            if (exception.getStatus() == AppException.ExceptionStatus.IOException || exception.getStatus() == AppException.ExceptionStatus.TimeoutException) {
-                toast("网络超时，请稍候再试");
-            } else {
-                toast(exception.getMessage());
+        public void onSuccess(TongbaoDNADetailEntity result) {
+            hideLoadingBar();
+            if (result == null) {
+                showFailLayout("请求异常，请稍候再试");
+                return;
+            }
+            if (result.RtnCode == 0) {
+                if (!TextUtils.isEmpty(result.RtnMsg)) {
+                    toast(result.RtnMsg);
+                }
+                requestDnaInfoByTongbao();
+                return;
+            }
+            try {
+                fetchDataByTongbao(result);
+            } catch (Exception e) {
+                Log.e(e.getMessage(), e);
             }
         }
 
     };
 
-    JsonCallback<DNACollectEntity> dnaCollectInfoCallback = new JsonCallback<DNACollectEntity>() {
+    JsonCallback<DNACollectEntity> dnaCollectInfoCallback = new CommonJsonCallback<DNACollectEntity>() {
 
         @Override
         public void onSuccess(DNACollectEntity result) {
             hideLoadingBar();
             if (result == null) {
-                showFailLayout("请求异常，请稍候再试");
                 return;
             }
             if (result.RtnCode == 0) {
@@ -315,16 +338,6 @@ public class DnaInfoActivity extends BaseArtActivity {
                 fetchCollectData(result);
             } catch (Exception e) {
                 Log.e(e.getMessage(), e);
-            }
-        }
-
-        @Override
-        public void onFailure(AppException exception) {
-//            showFailLayout("请求异常，请稍候再试");
-            if (exception.getStatus() == AppException.ExceptionStatus.IOException || exception.getStatus() == AppException.ExceptionStatus.TimeoutException) {
-                toast("网络超时，请稍候再试");
-            } else {
-                toast(exception.getMessage());
             }
         }
 
@@ -397,6 +410,29 @@ public class DnaInfoActivity extends BaseArtActivity {
 
         }
     }
+
+    private void fetchDataByTongbao(final TongbaoDNADetailEntity entity) throws Exception {
+        imageLoader.displayImage(entity.ImgUrl, artImg);
+        artImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doShowImg(entity.ImgUrl);
+            }
+        });
+        if (!TextUtils.isEmpty(entity.ArtName)) {
+            artName.setText(entity.ArtName);
+        }
+        if (!TextUtils.isEmpty(entity.ArtType)) {
+            artType.setText(entity.ArtType);
+        }
+        if (!TextUtils.isEmpty(entity.ArtYear)) {
+            artAge.setText(entity.ArtYear);
+        }
+        if (!TextUtils.isEmpty(entity.artPrice)) {
+            artPrice.setText(entity.artPrice);
+        }
+    }
+
 
     private void fetchCollectData(DNACollectEntity entity) throws Exception {
         for (final DNACollectEntity.CollectItem item : entity.data) {

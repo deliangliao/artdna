@@ -63,11 +63,11 @@
     <ScrollView
         android:id="@+id/art_detail_info_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -248,15 +248,12 @@
 
             <TextView
                 android:id="@+id/support_tech"
-                style="@style/black_title.16sp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
+                style="@style/black_title.14sp"
                 android:layout_gravity="center"
-                android:gravity="center"
                 android:padding="10dp"
-                android:text="技术支持：北科易斯" />
-
+                android:text="技术支持：北科易斯 http://www.bk-easy.com" />
         </LinearLayout>
     </ScrollView>
+
 
 </LinearLayout>

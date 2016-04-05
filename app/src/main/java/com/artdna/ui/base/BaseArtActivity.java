@@ -18,6 +18,8 @@ import com.artdna.utils.ImageLoader;
 import com.artdna.utils.UIHelper;
 import com.shengshi.base.tools.Log;
 import com.shengshi.base.ui.BaseActionBarActivity;
+import com.shengshi.http.net.AppException;
+import com.shengshi.http.net.callback.JsonCallback;
 
 import butterknife.ButterKnife;
 
@@ -272,6 +274,22 @@ public abstract class BaseArtActivity extends SwipeBackPagerActivity implements 
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(mActivity);
+    }
+
+    public abstract class CommonJsonCallback<T> extends JsonCallback<T> {
+
+        @Override
+        public void onFailure(AppException exception) {
+            hideTipDialog();
+            hideLoadingBar();
+            if (exception.getStatus() == AppException.ExceptionStatus.IOException || exception.getStatus() == AppException.ExceptionStatus.TimeoutException) {
+                toast("网络超时，请稍候再试");
+            } else if (exception.getStatus() == AppException.ExceptionStatus.ParseJsonException) {
+                toast("接口返回数据类型错误");
+            } else {
+                Log.e(exception.getMessage(), exception);
+            }
+        }
     }
 
     public Drawable getDrawableById(int drawableId) {

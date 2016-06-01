@@ -308,7 +308,6 @@ public class DnaInfoActivity extends BaseArtActivity {
                 if (!TextUtils.isEmpty(result.RtnMsg)) {
                     toast(result.RtnMsg);
                 }
-                requestDnaInfoByTongbao();
                 return;
             }
             try {

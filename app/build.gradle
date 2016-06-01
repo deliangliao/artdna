@@ -33,10 +33,10 @@ android {
             // No debug config
         }
         release {
-            storeFile file('../deliangliao.jks')
-            storePassword "815937"
-            keyAlias "deliang"
-            keyPassword "815937"
+            storeFile file('../artdna.jks')
+            storePassword "artdna"
+            keyAlias "artdna"
+            keyPassword "artdna"
         }
     }
 
